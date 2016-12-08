@@ -1,16 +1,17 @@
-#include <map>
+#include <tr1/unordered_map>
 #include <iostream>
+#include <map>
 
 using namespace std;
 
-map<int,pair<int,int>> solverRecursive(pair<int,pair<int,int>> actualCardPicked, map<int,pair<int,int>> remainingCards){
+unordered_map<int,pair<int,int>> solverRecursive(pair<int,pair<int,int>> actualCardPicked, unordered_map<int,pair<int,int>> remainingCards){
     int max = 0;
-    map<int,pair<int,int>> cardsPickMax = {{actualCardPicked.first, actualCardPicked.second}};
+    unordered_map<int,pair<int,int>> cardsPickMax = {{actualCardPicked.first, actualCardPicked.second}};
     for(const auto &nextCard : remainingCards){
         if(nextCard.second.first == actualCardPicked.second.first || nextCard.second.second == actualCardPicked.second.second){
             map<int,pair<int,int>> remainingCardsNext = remainingCards;
             remainingCardsNext.erase(nextCard.first);
-            map<int,pair<int,int>> bestMap = solverRecursive(nextCard, remainingCardsNext);
+            unordered_map<int,pair<int,int>> bestMap = solverRecursive(nextCard, remainingCardsNext);
             if(bestMap.size() > max){
                 max = bestMap.size();
                 bestMap.insert(actualCardPicked);
@@ -20,13 +21,13 @@ map<int,pair<int,int>> solverRecursive(pair<int,pair<int,int>> actualCardPicked,
     }
     return cardsPickMax;
 }
-map<int,pair<int,int>> solver(map<int,pair<int,int>> cards){
+unordered_map<int,pair<int,int>> solver(unordered_map<int,pair<int,int>> cards){
     int max = 0;
-    map<int,pair<int,int>> cardsPickMax;
+    unordered_map<int,pair<int,int>> cardsPickMax;
     for(const auto &card : cards){
-        map<int,pair<int,int>> remainingCardsNext = cards;
+        unordered_map<int,pair<int,int>> remainingCardsNext = cards;
         remainingCardsNext.erase(card.first);
-        map<int,pair<int,int>> bestEnd = solverRecursive(card , remainingCardsNext);
+        unordered_map<int,pair<int,int>> bestEnd = solverRecursive(card , remainingCardsNext);
         if(bestEnd.size() > max){
             max = bestEnd.size();
             bestEnd.insert(card);

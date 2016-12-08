@@ -1,19 +1,21 @@
-#include <map>
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
+#include <vector>
+#include "card.hpp"
 
 using namespace std;
 
-map<int,pair<int,int>> generator(int nbColor, int nbNumber, int nbCard){
+std::vector<Card> generator(int nbColor, int nbNumber, int nbCard){
     srand(time(NULL));
-    map<int,pair<int,int>> cards;
+    std::vector<Card> randomCards;
     for(int i = 0; i < nbCard; i++)
     {
         int color = rand() % nbColor;
         int number = rand() % nbNumber;
-        cards.insert(pair<int, pair<int,int>>(i,pair<int,int>(color,number)));
+        Card c = Card(color,number);
+        randomCards.push_back(c);
     }
 
-    return cards;
+    return randomCards;
 }
