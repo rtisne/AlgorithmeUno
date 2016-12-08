@@ -4,19 +4,27 @@
 
 using namespace std;
 
+bool getIntersectCard(Card c1, Card c2){
 
+  if(c1.getColor() == c2.getColor() && c1.getNumber() == c2.getNumber()){
+    return true;
+  }
+  return false;
+}
 int main (int argc, char *argv[]){
    std::vector<Card> cards = generator(4,13,10);
-   std::vector<stack<Card> > test = dfs(cards);
+   std::vector<std::vector<Card> > dfs_patate = dfs(cards);
+   cout << " <<<<<< Generator >>>>>>" << endl;
     for(unsigned int i = 0 ; i < cards.size();i++){
     	cout << " Color : " << cards[i].getColor() << " / Number : " << cards[i].getNumber() << endl;
     }
-    // for (const auto &card : cards)
-    //     cout << "Id Card : " << card.first << " / Color : " << card.second.color << " / Number : " << card.second.number << endl;
-
-  //  unordered_map<int,pair<int,int>> bestMap = dfs(cards);
-
- //   cout << "Best Map Count : " << bestMap.size() << endl;
-  //  for (const auto &card : bestMap)
-   //     cout << "Id Card : " << card.first << " / Color : " << card.second.first << " / Number : " << card.second.second << endl;
+   cout << " <<<<<< DFS >>>>>>" << endl;
+    for(unsigned int v = 0; v < dfs_patate.size(); v++)
+    {
+      cout << "Patate " << v << ":" << endl;
+      for(unsigned int i = 0; i < dfs_patate[v].size(); i++)
+      {
+        cout << " Color : " << dfs_patate[v][i].getColor() << " / Number : " << dfs_patate[v][i].getNumber() << endl;
+      }
+    }
 }
