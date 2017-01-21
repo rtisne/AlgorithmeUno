@@ -1,4 +1,5 @@
 #include "generator.cpp"
+#include "bruteForce.cpp"
 #include "card.hpp"
 #include "dfs.cpp"
 
@@ -13,10 +14,15 @@ bool getIntersectCard(Card c1, Card c2){
 }
 int main (int argc, char *argv[]){
    std::vector<Card> cards = generator(4,13,10);
+   std::vector<Card> brute = bruteForce(cards);
    std::vector<std::vector<Card> > dfs_patate = dfs(cards);
    cout << " <<<<<< Generator >>>>>>" << endl;
     for(unsigned int i = 0 ; i < cards.size();i++){
     	cout << " Color : " << cards[i].getColor() << " / Number : " << cards[i].getNumber() << endl;
+    }
+   cout << "<<<<<<< Brute Force >>>>>>" << endl;
+  for(unsigned int i = 0 ; i < brute.size();i++){
+      cout << " Color : " << brute[i].getColor() << " / Number : " << brute[i].getNumber() << endl;
     }
    cout << " <<<<<< DFS >>>>>>" << endl;
     for(unsigned int v = 0; v < dfs_patate.size(); v++)

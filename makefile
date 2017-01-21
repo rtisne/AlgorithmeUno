@@ -6,6 +6,9 @@ main: main.o
 generator.o: generator.cpp card.hpp
 	g++ -o generator.o -c generator.cpp -W -Wall -ansi -pedantic
 
+bruteForce.o : bruteForce.cpp bruteForce.hpp
+	g++ -o bruteForce.o -c bruteForce.cpp -W -Wall -ansi -pedantic
+	
 dfs.o: dfs.cpp dfs.hpp
 	g++ -o dfs.o -c dfs.cpp -W -Wall -ansi -pedantic	
 
