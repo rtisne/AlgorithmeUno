@@ -12,6 +12,9 @@ bruteForce.o : bruteForce.cpp bruteForce.hpp
 dfs.o: dfs.cpp dfs.hpp
 	g++ -o dfs.o -c dfs.cpp -W -Wall -ansi -pedantic	
 
+signature.o : signature.cpp signature.hpp
+	g++ -o dfs.o -c signature.cpp -W -Wall -ansi -pedantic	
+
 main.o: main.cpp
 	g++ -o main.o -c main.cpp -W -Wall -ansi -pedantic
 

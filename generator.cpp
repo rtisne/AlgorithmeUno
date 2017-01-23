@@ -13,7 +13,7 @@ std::vector<Card> generator(int nbColor, int nbNumber, int nbCard){
     {
         int color = rand() % nbColor;
         int number = rand() % nbNumber;
-        Card c = Card(color,number);
+        Card c = Card(color,number,i);
         randomCards.push_back(c);
     }
 
