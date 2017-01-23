@@ -13,7 +13,7 @@ bool getIntersectCard(Card c1, Card c2){
   }
   return false;
 }
-int main (int argc, char *argv[]){
+int main (){
    std::vector<Card> cards = generator(4,13,10);
    std::vector<Card> brute = bruteForce(cards);
    std::vector<std::vector<Card> > dfs_patate = dfs(cards);
@@ -34,8 +34,13 @@ int main (int argc, char *argv[]){
         cout << " Color : " << dfs_patate[v][i].getColor() << " / Number : " << dfs_patate[v][i].getNumber()  << " / Id : " << dfs_patate[v][i].getId() << endl;
       }
     }
-    
+
+    cout << "<<<<<<< Signatures >>>>>>" << endl;
     for(unsigned int i = 0; i < dfs_patate.size()-1;i++){
 		signature(dfs_patate[i],dfs_patate[i+1]);
 	}
+    for(unsigned int i = 0; i < listSignature.size(); i++){
+        cout << listSignature.at(i).toString() << endl;
+    }
+
 }

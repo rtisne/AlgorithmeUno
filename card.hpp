@@ -1,8 +1,9 @@
 #ifndef CARD_H
 #define CARD_H
-  
-class Card 
-{ 
+#include <sstream>
+
+class Card
+{
 public:
 	Card(int _color, int _number, int _id){
 		color = _color;
@@ -25,6 +26,12 @@ public:
 	void setVisit(bool _visit){
 		visit = _visit;
 	}
+    std::string toString(){
+        std::ostringstream oss;
+        oss << "(" << color << ",";
+        oss << number << ")";
+  	    return oss.str();
+    }
 	bool operator==(Card const &c) const{
 		return (this->id == c.getId());
 	}
@@ -36,7 +43,7 @@ private:
 	int number;
 	int id;
 	bool visit;
-}; 
+};
 
 
 #endif

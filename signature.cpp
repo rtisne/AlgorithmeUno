@@ -1,11 +1,10 @@
 #include <vector>
 #include <algorithm>
-#include <iterator> 
+#include <iterator>
 #include <string>
 #include <iostream>
+#include <sstream>
 #include "card.hpp"
-
-
 
 void signatureCalculator(std::vector<Card> cards,std::vector<Card> result, Card card);
 
@@ -15,8 +14,23 @@ struct Signature {
 	std::vector<Card> use;
 	string type;
 	int size;
-	
+
 	Signature(std::vector<Card> c, std::vector<Card> u, string t, int s): card(c),use(u),type(t),size(s){}
+	string toString() {
+	  std::ostringstream oss;
+	  oss << "{(";
+
+	  for(unsigned int i = 0; i < card.size(); i ++){
+	    oss << card[i].toString();
+	  }
+	  oss << ")," << type << ",{";
+	  for(unsigned int i = 0; i < use.size(); i ++){
+	    oss << card[i].toString();
+	  }
+	  oss << "}} : ";
+	  oss << size;
+	  return oss.str();
+	}
 };
 
 std::vector<Signature> listSignature;
@@ -27,7 +41,7 @@ bool equalSignature(Signature s1,std::vector<Card> v1, std::vector<Card> v2, str
 
 std::vector<Card> intersection (std::vector<Card> p1, std::vector<Card> p2){
 	std::vector<Card> tmp;
-	
+
 	set_intersection(p1.begin(),p1.end(),p2.begin(),p2.end(),back_inserter(tmp));
 
    return tmp;
@@ -45,7 +59,7 @@ void signature(std::vector<Card> p1,std::vector<Card> p2){
 	}
 	for(unsigned int i = 0; i < signaturesResult.size(); i++){
 		calculSign(signaturesResult.at(i), intersec);
-	} 
+	}
 }
 
 void signatureCalculator(std::vector<Card> cards,std::vector<Card> result, Card card){
@@ -92,7 +106,7 @@ void calculSign(std::vector<Card> result, std::vector<Card> intersec){
 			}
 		}
 	}
-	
+
 	bool found = false;
 	for(unsigned int i = 0; i < listSignature.size(); i++){
 		if(equalSignature(listSignature[i],lis,used,type)){
@@ -106,4 +120,3 @@ void calculSign(std::vector<Card> result, std::vector<Card> intersec){
 		listSignature.push_back(Signature(lis,used,type,result.size()));
 	 }
 }
-
