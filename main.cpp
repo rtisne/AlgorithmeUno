@@ -31,13 +31,14 @@ int main (){
       cout << "Patate " << v << ":" << endl;
       for(unsigned int i = 0; i < dfs_patate[v].size(); i++)
       {
+        dfs_patate[v][i].setVisit(false);
         cout << " Color : " << dfs_patate[v][i].getColor() << " / Number : " << dfs_patate[v][i].getNumber()  << " / Id : " << dfs_patate[v][i].getId() << endl;
       }
     }
 
     cout << "<<<<<<< Signatures >>>>>>" << endl;
     for(unsigned int i = 0; i < dfs_patate.size()-1;i++){
-		signature(dfs_patate[i],dfs_patate[i+1]);
+		longestHand(dfs_patate[i],dfs_patate[i+1]);
 	}
     for(unsigned int i = 0; i < listSignature.size(); i++){
         cout << listSignature.at(i).toString() << endl;

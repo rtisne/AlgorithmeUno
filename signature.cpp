@@ -47,27 +47,27 @@ std::vector<Card> intersection (std::vector<Card> p1, std::vector<Card> p2){
    return tmp;
 }
 
-void signature(std::vector<Card> p1,std::vector<Card> p2){
+void longestHand(std::vector<Card> p1,std::vector<Card> p2){
 	signaturesResult.clear();
 	std::vector<Card> intersec = intersection(p1,p2);
 	for(unsigned int i = 0; i < p2.size(); i++){
-		std::vector<Card> tmp = p2;
-		tmp.erase(tmp.begin() + i);
+		std::vector<Card> tmp = p2;				
+		tmp[i].setVisit(true);
 		std::vector<Card> result;
 		result.push_back(p2.at(i));
-		signatureCalculator(tmp,result, p2.at(i));
+		longestHandRecursive(tmp,result, p2.at(i));
 	}
 	for(unsigned int i = 0; i < signaturesResult.size(); i++){
 		calculSign(signaturesResult.at(i), intersec);
 	}
 }
 
-void signatureCalculator(std::vector<Card> cards,std::vector<Card> result, Card card){
+void longestHandRecursive(std::vector<Card> cards,std::vector<Card> result, Card card){
 	if(!cards.empty()){
 		for(unsigned int i = 0 ; i < cards.size(); i++){
-			if(cards[i].getColor() == card.getColor() || cards[i].getNumber() == card.getNumber()){
+			if((cards[i].getColor() == card.getColor() || cards[i].getNumber() == card.getNumber()) && cards[i].getVisit() == false){
 				std::vector<Card> tmp = cards;
-				tmp.erase(tmp.begin() + i);
+				tmp[i].setVisit(true);
 				std::vector<Card> nextResult = result;
 				nextResult.push_back(cards.at(i));
 				signatureCalculator(tmp, nextResult, cards.at(i));
